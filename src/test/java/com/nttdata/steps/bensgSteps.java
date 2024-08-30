@@ -1,5 +1,6 @@
 package com.nttdata.steps;
-import org.openqa.selenium.By;
+
+import com.nttdata.page.bensgStorePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,35 +8,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import java.util.List;
-
 public class bensgSteps {
-
-    private static By passwordField;
     private WebDriver driver;
+    private WebDriverWait wait;
 
     //constructor
-    public bensgSteps(WebDriver driver){
+    public bensgSteps(WebDriver driver) {
         this.driver = driver;
-    }
-
-    /**
-     * Escribir el usuario
-     * @param user el usuario
-     */
-    public void typeUser(String user){
-
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 
     }
 
-    /**
-     * Escribir el password
-     * @param password el password del usuario
-     */
-    public void typePassword(String password){
-        this.driver.findElement(bensgSteps.passwordField).sendKeys(password);
+    /* Escribir el usuario */
+    public void typeUser(String user) {
+        WebElement userInputElement = driver.findElement(bensgStorePage.userInput);
+        userInputElement.sendKeys(user);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(444));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(bensgStorePage.loginButton));
     }
 
+    /* Escribir el password */
+    public void typePassword(String password) {
+        driver.findElement(bensgStorePage.passInput).sendKeys(password);
+    }
 
+    /* Hacer click en el botón login */
+    public void login() {
+        driver.findElement(bensgStorePage.loginButton).click();
+    }
 
+    /*de aqui para arriba no tocar nada*/
 }
