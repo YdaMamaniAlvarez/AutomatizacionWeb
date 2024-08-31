@@ -38,5 +38,9 @@ public class bensgSteps {
         driver.findElement(bensgStorePage.loginButton).click();
     }
 
-    /*de aqui para arriba no tocar nada*/
+   
+    public void spinUp() {
+        driver.findElement(bensgStorePage.btnSpinUpProducto).click();
+    }
+
 }
