@@ -1,5 +1,6 @@
 package com.nttdata.stepsdefinitions;
 
+
 import com.nttdata.page.bensgStorePage;
 import com.nttdata.steps.InventorySteps;
 import com.nttdata.steps.bensgSteps;
@@ -13,6 +14,7 @@ import org.junit.Assert;
 
 import static com.nttdata.core.DriverManager.getDriver;
 import static com.nttdata.core.DriverManager.screenShot;
+import static com.nttdata.core.DriverManager.scrollDown;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +24,7 @@ import java.time.Duration;
 public class bensgStoreStepsDefinitions {
     private WebDriver driver;
     private bensgSteps bensgSteps;
+
 
     private InventorySteps inventorySteps(WebDriver driver) {
         return new InventorySteps(driver);
@@ -69,11 +72,14 @@ public class bensgStoreStepsDefinitions {
 
         // Navegar a la categoría
         wait.until(ExpectedConditions.elementToBeClickable(categoriaLocator)).click();
+        scrollDown();
         screenShot();
+
 
         // Esperar hasta que la subcategoría sea visible dentro del menú antes de intentar hacer clic
         WebElement subcategoriaElement = wait.until(ExpectedConditions.visibilityOfElementLocated(subcategoriaLocator));
         subcategoriaElement.click();
+        scrollDown();
         screenShot();
     }
 
